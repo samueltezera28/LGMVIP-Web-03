@@ -1,4 +1,4 @@
-# Project A - Registration Form with Inline Data Display
+# Registration Form with Inline Data Display
 
 Welcome, This is a simple web project that demonstrates the creation of a registration form using HTML, CSS, and JavaScript. The unique feature of this form is that it displays the entered data inline on the same page without requiring a separate page or server interaction.
 
