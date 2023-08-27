@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>Student Enrollment Form</h1>
+    </div>
+    <div class="container">
+        <div class="form-container">
+            <h2>Registration Form</h2>
+            <form id="registrationForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="website">Website:</label>
+                <input type="url" id="website" name="website" required>
+
+                <label for="image">Image Link:</label>
+                <input type="url" id="image" name="image" required>
+
+                <label>Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <label>Skills:</label>
+                <div class="skills-container">
+                    <input type="checkbox" class="skills-checkbox" name="skills[]" value="java"> Java
+                    <input type="checkbox" class="skills-checkbox" name="skills[]" value="html"> HTML
+                    <input type="checkbox" class="skills-checkbox" name="skills[]" value="css"> CSS
+                </div>
+
+                <div class="button-container">
+                    <button type="button" onclick="displayData()">Submit</button>
+                    <button type="button" onclick="clearFields()" style="background-color: red;">Clear</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="user-list-container">
+            <h2>Registered Users</h2>
+            <div class="user-list" id="userList"></div>
+        </div>
+    </div>
+
+    <script>
+        function displayData() {
+            const form = document.getElementById('registrationForm');
+            const userList = document.getElementById('userList');
+
+            const name = form.name.value;
+            const email = form.email.value;
+            const website = form.website.value;
+            const image = form.image.value;
+            const gender = form.gender.value;
+            const skills = Array.from(form.querySelectorAll('.skills-checkbox:checked')).map(skill => skill.value);
+
+            const userDiv = document.createElement('div');
+            userDiv.classList.add('user');
+            userDiv.innerHTML = `
+    <img src="${image}" alt="${name}'s Image">
+    <div class="user-details">
+      <h3>${name}</h3>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Website:</strong> <a href="${website}" target="_blank">${website}</a></p>
+      <p><strong>Gender:</strong> ${gender}</p>
+      <p><strong>Skills:</strong> ${skills.join(', ')}</p>
+    </div>
+  `;
+
+            userList.appendChild(userDiv);
+
+            // Clear form fields after submission
+            form.reset();
+        }
+
+        function clearFields() {
+            const form = document.getElementById('registrationForm');
+            form.reset();
+        }
+    </script>
+</body>
+
+</html>
